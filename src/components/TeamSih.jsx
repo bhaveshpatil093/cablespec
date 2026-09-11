@@ -1,5 +1,5 @@
 import React from 'react';
-import { Award, Users, ShieldCheck, Github, Mail, Globe, MapPin } from 'lucide-react';
+import { Award, Users, ShieldCheck } from 'lucide-react';
 import { CABLESPEC_PROJECT } from '../data/cablespecData';
 
 export default function TeamSih() {
@@ -7,12 +7,12 @@ export default function TeamSih() {
   const sih = CABLESPEC_PROJECT.sihDetails;
 
   return (
-    <section id="team" className="py-20 bg-slate-950 border-t border-slate-800 relative">
+    <section id="team" className="py-20 bg-[#080d16] border-t border-[#1d2e45] relative bg-grid-blueprint">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 font-mono text-xs uppercase tracking-wider mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#121e2d] border border-[#1d2e45] text-cyan-400 font-mono text-xs uppercase tracking-wider mb-4">
             <Award className="w-3.5 h-3.5" />
             <span>Smart India Hackathon 2026 Showcase</span>
           </div>
@@ -25,22 +25,22 @@ export default function TeamSih() {
         </div>
 
         {/* SIH Banner Card */}
-        <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-cyan-500/30 bg-slate-900/80 mb-12 relative overflow-hidden">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs font-mono">
+        <div className="rounded-2xl bg-[#121e2d] p-6 border border-[#1d2e45] mb-12 font-mono text-xs">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             
-            <div className="p-4 rounded-xl bg-slate-950 border border-slate-800">
+            <div className="p-4 rounded-xl bg-[#0d1624] border border-[#1d2e45]">
               <span className="text-slate-400 block uppercase">HACKATHON TRACK</span>
-              <span className="text-cyan-300 font-bold text-sm block mt-1">{sih.track}</span>
+              <span className="text-cyan-300 font-bold text-xs block mt-1">{sih.track}</span>
             </div>
 
-            <div className="p-4 rounded-xl bg-slate-950 border border-slate-800">
+            <div className="p-4 rounded-xl bg-[#0d1624] border border-[#1d2e45]">
               <span className="text-slate-400 block uppercase">PROBLEM STATEMENT ID</span>
-              <span className="text-amber-400 font-bold text-sm block mt-1">{sih.problemId}</span>
+              <span className="text-amber-400 font-bold text-xs block mt-1">{sih.problemId}</span>
             </div>
 
-            <div className="p-4 rounded-xl bg-slate-950 border border-slate-800">
+            <div className="p-4 rounded-xl bg-[#0d1624] border border-[#1d2e45]">
               <span className="text-slate-400 block uppercase">PRIMARY HARDWARE OBJECTIVE</span>
-              <span className="text-emerald-400 font-bold text-sm block mt-1">Automated Specimen Prep Machine</span>
+              <span className="text-emerald-400 font-bold text-xs block mt-1">Automated Specimen Prep Machine</span>
             </div>
 
           </div>
@@ -53,21 +53,21 @@ export default function TeamSih() {
             Engineering Team Members
           </h3>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 font-mono">
             {team.members.map((m, i) => (
-              <div key={i} className="glass-card p-6 rounded-2xl border border-slate-800 space-y-3 relative">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center font-bold text-slate-950 font-display text-lg">
+              <div key={i} className="rounded-2xl bg-[#121e2d] p-5 border border-[#1d2e45] space-y-3">
+                <div className="w-10 h-10 rounded-lg bg-cyan-500 flex items-center justify-center font-bold text-slate-950 font-display text-base">
                   {m.name.charAt(0)}
                 </div>
 
                 <div>
-                  <h4 className="text-base font-bold text-white">{m.name}</h4>
-                  <span className="text-xs font-mono text-cyan-400 font-semibold block mt-0.5">
+                  <h4 className="text-sm font-bold text-white">{m.name}</h4>
+                  <span className="text-xs text-cyan-400 font-semibold block mt-0.5">
                     {m.role}
                   </span>
                 </div>
 
-                <p className="text-xs text-slate-400 font-sans leading-relaxed pt-2 border-t border-slate-800">
+                <p className="text-xs text-slate-400 font-sans leading-relaxed pt-2 border-t border-[#1d2e45]">
                   {m.focus}
                 </p>
               </div>
@@ -82,16 +82,16 @@ export default function TeamSih() {
             Academic & Industrial Mentors
           </h3>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 font-mono text-xs">
             {team.mentors.map((men, i) => (
-              <div key={i} className="p-6 rounded-2xl bg-slate-900 border border-slate-800 flex items-start gap-4">
-                <div className="w-10 h-10 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-cyan-400 font-bold font-mono">
+              <div key={i} className="p-5 rounded-2xl bg-[#121e2d] border border-[#1d2e45] flex items-start gap-4">
+                <div className="w-9 h-9 rounded-lg bg-[#0d1624] border border-[#1d2e45] flex items-center justify-center text-cyan-400 font-bold">
                   M{i + 1}
                 </div>
                 <div>
-                  <h4 className="text-base font-bold text-white">{men.name}</h4>
-                  <span className="text-xs font-mono text-cyan-300 block">{men.role}</span>
-                  <span className="text-xs font-mono text-slate-400 block mt-1">
+                  <h4 className="text-sm font-bold text-white">{men.name}</h4>
+                  <span className="text-xs text-cyan-300 block">{men.role}</span>
+                  <span className="text-xs text-slate-400 block mt-0.5">
                     Specialization: {men.specialization}
                   </span>
                 </div>
