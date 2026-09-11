@@ -1,20 +1,10 @@
 import React, { useState } from 'react';
-import { 
-  Cable, Scissors, GitFork, Layers, Eye, ShieldCheck, 
-  BoxSelect, CheckCircle2, QrCode, ArrowRight, Activity, Check
-} from 'lucide-react';
+import { Cable, Scissors, GitFork, Layers, Eye, ShieldCheck, BoxSelect, CheckCircle2, QrCode, ArrowRight, Activity } from 'lucide-react';
 import { CABLESPEC_PROJECT } from '../data/cablespecData';
+import { PanelCard, DashboardCard, StatusBadge, TimelineItem } from './ui';
 
 const STAGE_ICONS = {
-  Cable: Cable,
-  Scissors: Scissors,
-  GitFork: GitFork,
-  Layers: Layers,
-  Eye: Eye,
-  ShieldCheck: ShieldCheck,
-  BoxSelect: BoxSelect,
-  CheckCircle2: CheckCircle2,
-  QrCode: QrCode
+  Cable, Scissors, GitFork, Layers, Eye, ShieldCheck, BoxSelect, CheckCircle2, QrCode
 };
 
 export default function ProcessPipeline() {
@@ -85,7 +75,7 @@ export default function ProcessPipeline() {
           
           {/* Left Timeline */}
           <div className="lg:col-span-6 space-y-4">
-            <div className="dashboard-panel p-6 space-y-4">
+            <PanelCard className="p-6 space-y-4">
               
               <div className="flex items-center justify-between border-b border-[#1d2e45] pb-3">
                 <div className="flex items-center space-x-2">
@@ -100,56 +90,32 @@ export default function ProcessPipeline() {
               </div>
 
               {/* Step List Timeline */}
-              <div className="space-y-3 font-mono text-xs">
-                {stages.map((st) => {
-                  const isSelected = st.id === selectedStageId;
-                  return (
-                    <div 
-                      key={st.id}
-                      onClick={() => setSelectedStageId(st.id)}
-                      className={`flex items-center justify-between p-3 rounded-lg border cursor-pointer transition-all ${
-                        isSelected 
-                          ? 'bg-[#162436] border-cyan-400 text-white' 
-                          : 'bg-[#0d1624] border-[#1d2e45] text-slate-300 hover:border-slate-700'
-                      }`}
-                    >
-                      <div className="flex items-center space-x-3">
-                        <div className={`w-7 h-7 rounded-full flex items-center justify-center font-bold text-xs ${
-                          isSelected ? 'bg-cyan-500 text-slate-950' : 'bg-[#2563eb] text-white'
-                        }`}>
-                          {st.id}
-                        </div>
-                        <span className="font-bold">{st.name}</span>
-                      </div>
-
-                      <div className="flex items-center space-x-4">
-                        <span className="text-emerald-400 font-bold text-[11px]">
-                          {st.id === 5 ? 'PASS' : 'Completed'}
-                        </span>
-                        <span className="typo-metadata text-[10px] hidden sm:inline">
-                          10 Sep 2026 09:{10 + st.id}
-                        </span>
-                        <div className="w-5 h-5 rounded-full border border-emerald-500/60 bg-emerald-950/40 flex items-center justify-center text-emerald-400">
-                          <Check className="w-3 h-3 text-emerald-400" />
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
+              <div className="space-y-3">
+                {stages.map((st) => (
+                  <TimelineItem
+                    key={st.id}
+                    stepNumber={st.id}
+                    name={st.name}
+                    status={st.id === 5 ? 'PASS' : 'Completed'}
+                    timestamp={`10 Sep 2026 09:${10 + st.id}`}
+                    isSelected={st.id === selectedStageId}
+                    onClick={() => setSelectedStageId(st.id)}
+                  />
+                ))}
               </div>
 
-            </div>
+            </PanelCard>
           </div>
 
           {/* Right Selected Stage Specs */}
           <div className="lg:col-span-6 space-y-6">
-            <div className="dashboard-panel p-6 sm:p-8 space-y-6">
+            <PanelCard className="p-6 sm:p-8 space-y-6">
               
               <div className="flex items-center justify-between border-b border-[#1d2e45] pb-4">
                 <div>
-                  <span className="typo-status-badge">
+                  <StatusBadge variant="pass">
                     STAGE 0{currentStage.id} OF 09 • {currentStage.category}
-                  </span>
+                  </StatusBadge>
                   <h3 className="typo-subsection-title mt-2">
                     {currentStage.name}
                   </h3>
@@ -166,31 +132,31 @@ export default function ProcessPipeline() {
 
               {/* Hardware Details Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="dashboard-card p-4">
+                <DashboardCard>
                   <span className="typo-tech-label text-cyan-400 block mb-1">
                     Primary Actuator
                   </span>
                   <p className="text-xs text-white font-mono font-semibold">
                     {currentStage.details.actuator}
                   </p>
-                </div>
+                </DashboardCard>
 
-                <div className="dashboard-card p-4">
+                <DashboardCard>
                   <span className="typo-tech-label text-cyan-400 block mb-1">
                     Feedback Sensor
                   </span>
                   <p className="text-xs text-white font-mono font-semibold">
                     {currentStage.details.sensor}
                   </p>
-                </div>
+                </DashboardCard>
               </div>
 
               {/* Operational Specs */}
               <div className="space-y-2 font-mono text-xs">
-                <div className="dashboard-card p-3 flex justify-between items-center">
+                <DashboardCard className="flex justify-between items-center">
                   <span className="typo-metadata uppercase">OPERATIONAL PARAMETERS:</span>
                   <span className="text-amber-400 font-bold">{currentStage.details.parameters}</span>
-                </div>
+                </DashboardCard>
 
                 <div className="p-3 rounded bg-emerald-950/20 border border-emerald-800/40 flex justify-between items-center">
                   <span className="text-emerald-400 font-bold text-xs">COMPLIANCE SPEC:</span>
@@ -198,7 +164,7 @@ export default function ProcessPipeline() {
                 </div>
               </div>
 
-            </div>
+            </PanelCard>
           </div>
 
         </div>

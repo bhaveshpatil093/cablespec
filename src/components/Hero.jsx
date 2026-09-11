@@ -1,6 +1,7 @@
 import React from 'react';
 import { Cpu, Cog, Smartphone, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { CableCrossSection } from './CableGraphics';
+import { Button, MetricCard, StatusBadge, PanelCard, DashboardCard } from './ui';
 
 export default function Hero({ onExplorePipeline }) {
   return (
@@ -42,7 +43,7 @@ export default function Hero({ onExplorePipeline }) {
             </p>
 
             {/* Core Innovation Hardware Callout Card */}
-            <div className="dashboard-panel p-4 space-y-2 relative">
+            <PanelCard className="p-4 space-y-2">
               <div className="flex items-center gap-2 typo-tech-label text-amber-400">
                 <Cog className="w-4 h-4 text-amber-400 animate-spin" style={{ animationDuration: '10s' }} />
                 <span>HARDWARE MACHINE PRIMARY INNOVATION</span>
@@ -50,48 +51,33 @@ export default function Hero({ onExplorePipeline }) {
               <p className="typo-body text-xs text-slate-300">
                 The core physical machine performs multi-axis mechanical feeding, thermal flattening, and 20 kN die punching. The smartphone application serves as the supporting <strong className="text-cyan-400">Digital Specimen Passport</strong> & LIMS traceability layer.
               </p>
-            </div>
+            </PanelCard>
 
             {/* Action buttons */}
             <div className="flex flex-wrap items-center gap-4 pt-2">
-              <button
-                onClick={onExplorePipeline}
-                className="flex items-center gap-2 px-6 py-3 rounded bg-cyan-500 text-slate-950 typo-tech-label text-xs sm:text-sm font-bold tracking-wider hover:bg-cyan-400 shadow-md shadow-cyan-500/20 transition-all active:scale-95"
-              >
-                <span>EXPLORE MACHINE PIPELINE</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
+              <Button onClick={onExplorePipeline} variant="primary" size="md" icon={ArrowRight}>
+                EXPLORE MACHINE PIPELINE
+              </Button>
 
-              <a
-                href="#architecture"
-                className="flex items-center gap-2 px-6 py-3 rounded bg-[#121e2d] border border-[#1d2e45] typo-tech-label text-xs sm:text-sm font-semibold text-slate-200 hover:text-cyan-400 hover:border-cyan-500/40 transition-all"
-              >
-                <Cpu className="w-4 h-4 text-cyan-400" />
-                <span>TECHNICAL DOSSIER</span>
+              <a href="#architecture">
+                <Button variant="secondary" size="md" icon={Cpu}>
+                  TECHNICAL DOSSIER
+                </Button>
               </a>
             </div>
 
             {/* Metrics Ribbon */}
-            <div className="grid grid-cols-3 gap-4 pt-6 border-t border-[#1d2e45]">
-              <div>
-                <span className="typo-metric text-white">35s</span>
-                <p className="typo-metadata mt-0.5">Cycle Time (vs 8m manual)</p>
-              </div>
-              <div>
-                <span className="typo-metric text-cyan-400">±0.015mm</span>
-                <p className="typo-metadata mt-0.5">Vision Tolerancing</p>
-              </div>
-              <div>
-                <span className="typo-metric text-emerald-400">100%</span>
-                <p className="typo-metadata mt-0.5">Digital Traceability</p>
-              </div>
+            <div className="grid grid-cols-3 gap-4 pt-4 border-t border-[#1d2e45]">
+              <MetricCard label="Cycle Time" value="35s" subtext="vs 8m manual prep" color="white" />
+              <MetricCard label="Vision Tolerancing" value="±0.015mm" subtext="Sub-pixel camera" color="cyan" />
+              <MetricCard label="Digital Traceability" value="100%" subtext="QR passport tag" color="emerald" />
             </div>
 
           </div>
 
           {/* Right Visual: Cable Specimen Passport Screen Graphic matching Phone App */}
           <div className="lg:col-span-5">
-            <div className="dashboard-panel p-6 shadow-2xl space-y-5">
+            <PanelCard className="shadow-2xl space-y-5">
               
               {/* Header */}
               <div className="flex items-center justify-between border-b border-[#1d2e45] pb-4">
@@ -126,20 +112,20 @@ export default function Hero({ onExplorePipeline }) {
 
                   <div>
                     <span className="typo-tech-label text-slate-400 block">PREPARATION STATUS</span>
-                    <span className="typo-status-badge inline-block mt-1">
+                    <StatusBadge variant="pass" className="inline-block mt-1">
                       STANDARD-READY
-                    </span>
+                    </StatusBadge>
                   </div>
                 </div>
 
                 {/* Right PASS Badge Gauge */}
-                <div className="dashboard-card p-3 flex flex-col items-center justify-center text-center">
+                <DashboardCard className="flex flex-col items-center justify-center text-center">
                   <div className="w-12 h-12 rounded-full border-2 border-emerald-500 bg-emerald-950/40 flex items-center justify-center mb-1 text-emerald-400">
                     <CheckCircle2 className="w-7 h-7 text-emerald-400" />
                   </div>
                   <span className="typo-status-badge border-0 bg-transparent text-emerald-400 px-0">PASS VERIFIED</span>
                   <span className="typo-metadata text-[9px] mt-0.5">Alignment • Geometry • Surface</span>
-                </div>
+                </DashboardCard>
 
               </div>
 
@@ -154,7 +140,7 @@ export default function Hero({ onExplorePipeline }) {
                 </span>
               </div>
 
-            </div>
+            </PanelCard>
           </div>
 
         </div>

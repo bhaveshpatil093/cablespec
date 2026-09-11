@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { QRCodeSVG } from 'qrcode.react';
 import { QrCode, Printer, CheckCircle2, Copy, FileText, Check } from 'lucide-react';
 import { CableCrossSection, DumbbellBlueprint } from './CableGraphics';
+import { Button, PanelCard, DashboardCard, StatusBadge, QRCodeFrame } from './ui';
 
 export default function SpecimenPassportGenerator() {
   const [cableType, setCableType] = useState('4-Core Aluminium Cable');
@@ -63,7 +63,7 @@ export default function SpecimenPassportGenerator() {
           
           {/* Left Form Controls */}
           <div className="lg:col-span-4 space-y-6">
-            <div className="dashboard-panel p-6 space-y-4">
+            <PanelCard className="p-6 space-y-4">
               <span className="typo-tech-label text-cyan-400 block border-b border-[#1d2e45] pb-2">
                 PASSPORT TELEMETRY INPUTS
               </span>
@@ -125,16 +125,16 @@ export default function SpecimenPassportGenerator() {
 
                 <div className="p-3 rounded bg-emerald-950/30 border border-emerald-800/40 flex justify-between items-center text-xs">
                   <span className="text-emerald-400 font-bold">Preparation Status:</span>
-                  <span className="typo-status-badge">STANDARD-READY</span>
+                  <StatusBadge variant="pass">STANDARD-READY</StatusBadge>
                 </div>
               </div>
 
-            </div>
+            </PanelCard>
           </div>
 
           {/* Right Mobile Passport Card */}
           <div className="lg:col-span-8 space-y-4">
-            <div id="printable-passport" className="dashboard-panel p-6 sm:p-8 space-y-6 shadow-2xl relative">
+            <PanelCard id="printable-passport" className="p-6 sm:p-8 space-y-6 shadow-2xl relative">
               
               {/* Passport Header */}
               <div className="flex items-center justify-between border-b border-[#1d2e45] pb-4">
@@ -183,12 +183,12 @@ export default function SpecimenPassportGenerator() {
                   <div>
                     <span className="typo-tech-label text-slate-400 block">PREPARATION STATUS</span>
                     <div className="inline-block mt-1">
-                      <span className="typo-status-badge">STANDARD-READY</span>
+                      <StatusBadge variant="pass">STANDARD-READY</StatusBadge>
                     </div>
                   </div>
 
                   {/* Vision Verification Table */}
-                  <div className="dashboard-card p-3 space-y-2">
+                  <DashboardCard className="p-3 space-y-2">
                     <span className="typo-tech-label text-slate-400 block border-b border-[#1d2e45] pb-1">
                       VISION VERIFICATION
                     </span>
@@ -221,14 +221,14 @@ export default function SpecimenPassportGenerator() {
                         <span className="typo-status-badge border-0 bg-transparent text-emerald-400 px-0">PASS</span>
                       </div>
                     </div>
-                  </div>
+                  </DashboardCard>
 
                 </div>
 
               </div>
 
               {/* Traceability Block */}
-              <div className="dashboard-card p-5 space-y-4">
+              <DashboardCard className="p-5 space-y-4">
                 
                 <div className="flex items-center justify-between border-b border-[#1d2e45] pb-2">
                   <div className="flex items-center space-x-2">
@@ -245,16 +245,8 @@ export default function SpecimenPassportGenerator() {
                 <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 items-center">
                   
                   {/* QR Code Block */}
-                  <div className="sm:col-span-5 flex flex-col items-center justify-center p-3 rounded-lg bg-white text-slate-950 border border-slate-700">
-                    <QRCodeSVG
-                      value={passportJSON}
-                      size={120}
-                      level="H"
-                      includeMargin={true}
-                    />
-                    <span className="typo-tech-label text-slate-800 mt-1">
-                      SCAN FOR COMPLETE RECORD
-                    </span>
+                  <div className="sm:col-span-5 flex justify-center">
+                    <QRCodeFrame value={passportJSON} />
                   </div>
 
                   {/* Metadata & Blueprint */}
@@ -279,28 +271,20 @@ export default function SpecimenPassportGenerator() {
 
                 </div>
 
-              </div>
+              </DashboardCard>
 
               {/* Actions */}
               <div className="pt-2 flex flex-wrap items-center justify-between gap-3 font-mono text-xs">
-                <button
-                  onClick={handleCopyJSON}
-                  className="flex items-center gap-2 px-4 py-2 rounded bg-[#0d1624] hover:bg-[#162436] border border-[#1d2e45] text-slate-300"
-                >
-                  <Copy className="w-3.5 h-3.5 text-cyan-400" />
-                  <span>{copied ? 'COPIED LIMS DATA' : 'COPY LIMS JSON'}</span>
-                </button>
+                <Button onClick={handleCopyJSON} variant="secondary" size="md" icon={Copy}>
+                  {copied ? 'COPIED LIMS DATA' : 'COPY LIMS JSON'}
+                </Button>
 
-                <button
-                  onClick={handlePrint}
-                  className="flex items-center gap-2 px-5 py-2 typo-tech-label text-slate-950 rounded bg-cyan-500 hover:bg-cyan-400 transition-all shadow-md shadow-cyan-500/20"
-                >
-                  <Printer className="w-4 h-4" />
-                  <span>PRINT DIGITAL PASSPORT CERTIFICATE</span>
-                </button>
+                <Button onClick={handlePrint} variant="primary" size="md" icon={Printer}>
+                  PRINT DIGITAL PASSPORT CERTIFICATE
+                </Button>
               </div>
 
-            </div>
+            </PanelCard>
           </div>
 
         </div>
