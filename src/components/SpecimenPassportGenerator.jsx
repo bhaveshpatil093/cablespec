@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
-import { QrCode, Smartphone, Printer, CheckCircle2, Copy, FileText, Check } from 'lucide-react';
+import { QrCode, Printer, CheckCircle2, Copy, FileText, Check } from 'lucide-react';
 import { CableCrossSection, DumbbellBlueprint } from './CableGraphics';
 
 export default function SpecimenPassportGenerator() {
@@ -46,15 +46,15 @@ export default function SpecimenPassportGenerator() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#121e2d] border border-[#1d2e45] text-cyan-400 font-mono text-xs uppercase tracking-wider mb-4">
+        <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#121e2d] border border-[#1d2e45] text-cyan-400 typo-tech-label">
             <QrCode className="w-3.5 h-3.5" />
             <span>Digital Passport & Traceability Module</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight font-display">
+          <h2 className="typo-section-title">
             Digital Specimen Passport Visual Interface
           </h2>
-          <p className="text-sm sm:text-base text-slate-400 mt-3 font-mono">
+          <p className="typo-body text-slate-400">
             Exact web replication of the CableSpec smartphone application passport card, LIMS JSON telemetry, and QR code verification.
           </p>
         </div>
@@ -63,8 +63,8 @@ export default function SpecimenPassportGenerator() {
           
           {/* Left Form Controls */}
           <div className="lg:col-span-4 space-y-6">
-            <div className="rounded-2xl bg-[#121e2d] p-6 border border-[#1d2e45] space-y-4">
-              <span className="text-xs font-mono font-bold text-cyan-400 uppercase tracking-widest block border-b border-[#1d2e45] pb-2">
+            <div className="dashboard-panel p-6 space-y-4">
+              <span className="typo-tech-label text-cyan-400 block border-b border-[#1d2e45] pb-2">
                 PASSPORT TELEMETRY INPUTS
               </span>
 
@@ -125,71 +125,71 @@ export default function SpecimenPassportGenerator() {
 
                 <div className="p-3 rounded bg-emerald-950/30 border border-emerald-800/40 flex justify-between items-center text-xs">
                   <span className="text-emerald-400 font-bold">Preparation Status:</span>
-                  <span className="text-white font-extrabold">STANDARD-READY</span>
+                  <span className="typo-status-badge">STANDARD-READY</span>
                 </div>
               </div>
 
             </div>
           </div>
 
-          {/* Right Mobile Passport Card Replication matching Phone Screenshot */}
+          {/* Right Mobile Passport Card */}
           <div className="lg:col-span-8 space-y-4">
-            <div id="printable-passport" className="rounded-2xl bg-[#121e2d] p-6 sm:p-8 border border-[#1d2e45] text-white space-y-6 shadow-2xl relative">
+            <div id="printable-passport" className="dashboard-panel p-6 sm:p-8 space-y-6 shadow-2xl relative">
               
-              {/* Phone Passport Screen Header */}
+              {/* Passport Header */}
               <div className="flex items-center justify-between border-b border-[#1d2e45] pb-4">
                 <div>
-                  <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest block">
+                  <span className="typo-tech-label text-slate-400 block">
                     SPECIMEN PASSPORT
                   </span>
-                  <h3 className="font-mono font-extrabold text-2xl text-white">
+                  <h3 className="typo-subsection-title text-2xl text-white">
                     {passportId}
                   </h3>
                 </div>
 
-                <div className="text-right font-mono text-[10px]">
+                <div className="text-right typo-metadata">
                   <span className="text-slate-300 font-bold block uppercase">CABLESPEC</span>
                   <span className="text-slate-500 block">PREPARE VERIFY TRACE TRUST</span>
                 </div>
               </div>
 
-              {/* Top Section: Cable Graphic + Details */}
+              {/* Cable Graphic + Specs */}
               <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
                 
-                {/* Cable Cross Section Graphic */}
+                {/* Cable Graphic */}
                 <div className="md:col-span-6">
                   <CableCrossSection cableLabel={cableType.toUpperCase()} />
                 </div>
 
-                {/* Details Column */}
+                {/* Specs Column */}
                 <div className="md:col-span-6 space-y-4 font-mono">
                   <div>
-                    <span className="text-[10px] text-slate-400 uppercase block">CABLE TYPE</span>
+                    <span className="typo-tech-label text-slate-400 block">CABLE TYPE</span>
                     <span className="text-base font-bold text-white">{cableType}</span>
                   </div>
 
                   <div className="grid grid-cols-2 gap-2">
                     <div>
-                      <span className="text-[10px] text-slate-400 uppercase block">SIZE</span>
+                      <span className="typo-tech-label text-slate-400 block">SIZE</span>
                       <span className="text-sm font-bold text-white">{sizeSqMm}</span>
                     </div>
 
                     <div>
-                      <span className="text-[10px] text-slate-400 uppercase block">BATCH</span>
+                      <span className="typo-tech-label text-slate-400 block">BATCH</span>
                       <span className="text-sm font-bold text-white">{batchId}</span>
                     </div>
                   </div>
 
                   <div>
-                    <span className="text-[10px] text-slate-400 uppercase block">PREPARATION STATUS</span>
-                    <div className="inline-block mt-1 px-3 py-1 rounded bg-emerald-950/60 border border-emerald-500 text-emerald-400 font-extrabold text-xs">
-                      STANDARD-READY
+                    <span className="typo-tech-label text-slate-400 block">PREPARATION STATUS</span>
+                    <div className="inline-block mt-1">
+                      <span className="typo-status-badge">STANDARD-READY</span>
                     </div>
                   </div>
 
-                  {/* Vision Verification Table & Circular PASS Ring */}
-                  <div className="p-3 rounded-xl bg-[#0d1624] border border-[#1d2e45] space-y-2">
-                    <span className="text-[10px] text-slate-400 uppercase font-bold block border-b border-[#1d2e45] pb-1">
+                  {/* Vision Verification Table */}
+                  <div className="dashboard-card p-3 space-y-2">
+                    <span className="typo-tech-label text-slate-400 block border-b border-[#1d2e45] pb-1">
                       VISION VERIFICATION
                     </span>
 
@@ -218,7 +218,7 @@ export default function SpecimenPassportGenerator() {
                       {/* PASS Circle Badge */}
                       <div className="w-14 h-14 rounded-full border-2 border-emerald-500 bg-emerald-950/40 flex flex-col items-center justify-center text-center">
                         <CheckCircle2 className="w-5 h-5 text-emerald-400" />
-                        <span className="text-[10px] font-extrabold text-emerald-400">PASS</span>
+                        <span className="typo-status-badge border-0 bg-transparent text-emerald-400 px-0">PASS</span>
                       </div>
                     </div>
                   </div>
@@ -227,17 +227,17 @@ export default function SpecimenPassportGenerator() {
 
               </div>
 
-              {/* Bottom Traceability Card matching Phone App */}
-              <div className="p-5 rounded-xl bg-[#0d1624] border border-[#1d2e45] space-y-4">
+              {/* Traceability Block */}
+              <div className="dashboard-card p-5 space-y-4">
                 
                 <div className="flex items-center justify-between border-b border-[#1d2e45] pb-2">
                   <div className="flex items-center space-x-2">
                     <FileText className="w-4 h-4 text-cyan-400" />
-                    <span className="font-mono text-xs font-bold text-white uppercase tracking-wider">
+                    <span className="typo-tech-label text-white">
                       TRACEABILITY
                     </span>
                   </div>
-                  <span className="text-[10px] font-mono text-slate-500 uppercase tracking-widest">
+                  <span className="typo-metadata uppercase">
                     ONE SPECIMEN A COMPLETE STORY
                   </span>
                 </div>
@@ -252,29 +252,28 @@ export default function SpecimenPassportGenerator() {
                       level="H"
                       includeMargin={true}
                     />
-                    <span className="text-[9px] font-mono text-slate-700 mt-1 font-bold tracking-wider uppercase">
+                    <span className="typo-tech-label text-slate-800 mt-1">
                       SCAN FOR COMPLETE RECORD
                     </span>
                   </div>
 
-                  {/* Metadata & Dumbbell Blueprint */}
+                  {/* Metadata & Blueprint */}
                   <div className="sm:col-span-7 space-y-3 font-mono text-xs">
                     <div className="grid grid-cols-2 gap-2 text-[11px]">
                       <div>
-                        <span className="text-slate-400 block">Created:</span>
+                        <span className="typo-metadata block">Created:</span>
                         <span className="font-bold text-white">10 Sep 2026</span>
                       </div>
                       <div>
-                        <span className="text-slate-400 block">Machine ID:</span>
+                        <span className="typo-metadata block">Machine ID:</span>
                         <span className="font-bold text-cyan-400">{machineId}</span>
                       </div>
                       <div>
-                        <span className="text-slate-400 block">Operator:</span>
+                        <span className="typo-metadata block">Operator:</span>
                         <span className="font-bold text-white">{operatorId}</span>
                       </div>
                     </div>
 
-                    {/* Dumbbell Blueprint Graphic */}
                     <DumbbellBlueprint />
                   </div>
 
@@ -282,7 +281,7 @@ export default function SpecimenPassportGenerator() {
 
               </div>
 
-              {/* Action Buttons */}
+              {/* Actions */}
               <div className="pt-2 flex flex-wrap items-center justify-between gap-3 font-mono text-xs">
                 <button
                   onClick={handleCopyJSON}
@@ -294,7 +293,7 @@ export default function SpecimenPassportGenerator() {
 
                 <button
                   onClick={handlePrint}
-                  className="flex items-center gap-2 px-5 py-2 rounded bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold transition-all shadow-md shadow-cyan-500/20"
+                  className="flex items-center gap-2 px-5 py-2 typo-tech-label text-slate-950 rounded bg-cyan-500 hover:bg-cyan-400 transition-all shadow-md shadow-cyan-500/20"
                 >
                   <Printer className="w-4 h-4" />
                   <span>PRINT DIGITAL PASSPORT CERTIFICATE</span>

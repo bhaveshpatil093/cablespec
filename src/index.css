@@ -41,25 +41,88 @@
   border-color: #283f5e;
 }
 
-.text-cool-gray {
+/* TYPOGRAPHY SYSTEM HIERARCHY */
+
+/* 1. Page Titles (Hero / Major Headings) */
+.typo-page-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(2rem, 5vw, 3.75rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+/* 2. Section Titles */
+.typo-section-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  color: #ffffff;
+}
+
+/* 3. Subsection Titles */
+.typo-subsection-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(1.125rem, 2vw, 1.35rem);
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+/* 4. Technical Labels (Monospaced uppercase used selectively) */
+.typo-tech-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6875rem; /* 11px */
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
   color: #94a3b8;
 }
 
-.text-electric-blue {
-  color: #38bdf8;
+/* 5. Metrics & Numeric Data */
+.typo-metric {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #ffffff;
 }
 
-/* Controlled Green for PASS states */
-.text-pass-green {
+/* 6. Body & Descriptions */
+.typo-body {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.6;
+  color: #cbd5e1;
+}
+
+/* 7. Status Indicators & Badges */
+.typo-status-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6875rem; /* 11px */
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  padding: 0.25rem 0.625rem;
+  border-radius: 0.25rem;
+  border: 1px solid rgba(16, 185, 129, 0.6);
+  background-color: rgba(16, 185, 129, 0.15);
   color: #10b981;
 }
 
-.bg-pass-green-muted {
-  background-color: rgba(16, 185, 129, 0.12);
+/* 8. Metadata & References */
+.typo-metadata {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6875rem; /* 11px */
+  color: #64748b;
 }
 
-.border-pass-green {
-  border-color: rgba(16, 185, 129, 0.6);
+.typo-reference {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem; /* 12px */
+  font-weight: 600;
+  color: #38bdf8;
 }
 
 /* Blueprint Grid Pattern */
@@ -70,22 +133,17 @@
     linear-gradient(to bottom, rgba(56, 189, 248, 0.035) 1px, transparent 1px);
 }
 
-/* Fine Technical Corner Crosshairs */
-.tech-box {
-  position: relative;
+/* Custom Dashboard Panels & Cards */
+.dashboard-panel {
   background-color: #121e2d;
   border: 1px solid #1d2e45;
-  border-radius: 0.75rem;
+  border-radius: 1rem;
 }
 
-.tech-box::before {
-  content: "";
-  position: absolute;
-  top: -1px;
-  left: 12px;
-  right: 12px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.25), transparent);
+.dashboard-card {
+  background-color: #0d1624;
+  border: 1px solid #1d2e45;
+  border-radius: 0.75rem;
 }
 
 /* Custom Scrollbars */
@@ -102,13 +160,4 @@
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #38bdf8;
-}
-
-@keyframes pulse-subtle {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
-}
-
-.animate-pulse-subtle {
-  animation: pulse-subtle 3s infinite ease-in-out;
 }

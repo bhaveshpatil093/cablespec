@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Activity, Terminal, Menu, X, ShieldCheck } from 'lucide-react';
+import { Terminal, Menu, X, ShieldCheck } from 'lucide-react';
 import { CableLogo } from './CableGraphics';
 
 export default function Navbar({ activeSection, setActiveSection }) {
@@ -28,7 +28,7 @@ export default function Navbar({ activeSection, setActiveSection }) {
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       scrolled 
         ? 'bg-[#080d16]/95 backdrop-blur-md border-b border-[#1d2e45] shadow-2xl py-2.5' 
-        : 'bg-[#080d16]/80 backdrop-blur-sm border-b border-[#1d2e45]/50 py-3.5'
+        : 'bg-[#080d16]/85 backdrop-blur-sm border-b border-[#1d2e45]/50 py-3.5'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
@@ -51,11 +51,11 @@ export default function Navbar({ activeSection, setActiveSection }) {
                 <span className="font-display font-extrabold text-lg sm:text-xl tracking-wider text-white">
                   CABLE<span className="text-cyan-400">SPEC</span>
                 </span>
-                <span className="px-1.5 py-0.5 text-[9px] font-mono font-bold uppercase tracking-wider bg-[#121e2d] text-cyan-400 border border-[#1d2e45] rounded">
+                <span className="typo-status-badge text-[9px] py-0.5">
                   PASSPORT AGENT
                 </span>
               </div>
-              <p className="text-[10px] text-slate-400 font-mono tracking-widest uppercase flex items-center gap-1.5">
+              <p className="typo-metadata text-[9px] tracking-widest uppercase flex items-center gap-1.5">
                 <span>FROM CABLE TO CERTAINTY</span>
               </p>
             </div>
@@ -71,7 +71,7 @@ export default function Navbar({ activeSection, setActiveSection }) {
                   const el = document.getElementById(item.id);
                   if (el) el.scrollIntoView({ behavior: 'smooth' });
                 }}
-                className={`px-3 py-1.5 text-xs font-mono font-medium rounded-md transition-all duration-200 ${
+                className={`px-3 py-1.5 typo-tech-label rounded-md transition-all duration-200 ${
                   activeSection === item.id
                     ? 'bg-[#121e2d] text-cyan-400 border border-[#1d2e45] font-bold shadow-sm'
                     : 'text-slate-300 hover:text-white hover:bg-[#121e2d]/60'
@@ -84,7 +84,7 @@ export default function Navbar({ activeSection, setActiveSection }) {
 
           {/* Tagline / Quick Action */}
           <div className="hidden sm:flex items-center space-x-3">
-            <div className="text-right text-[10px] font-mono text-slate-400 hidden xl:block">
+            <div className="text-right typo-metadata hidden xl:block">
               <span className="block text-slate-300 font-bold">PREPARE • VERIFY • TRACE • TRUST</span>
               <span className="text-emerald-400 flex items-center justify-end gap-1">
                 <ShieldCheck className="w-3 h-3 text-emerald-400" />
@@ -97,7 +97,7 @@ export default function Navbar({ activeSection, setActiveSection }) {
                 const el = document.getElementById('passport');
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="flex items-center space-x-2 px-3.5 py-1.5 text-xs font-mono font-bold rounded bg-cyan-500 text-slate-950 hover:bg-cyan-400 transition-all shadow-md shadow-cyan-500/20 active:scale-95"
+              className="flex items-center space-x-2 px-3.5 py-1.5 typo-tech-label text-slate-950 rounded bg-cyan-500 hover:bg-cyan-400 transition-all shadow-md shadow-cyan-500/20 active:scale-95"
             >
               <Terminal className="w-3.5 h-3.5" />
               <span>PASSPORT SIMULATOR</span>
@@ -128,7 +128,7 @@ export default function Navbar({ activeSection, setActiveSection }) {
                 const el = document.getElementById(item.id);
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
               }}
-              className={`block w-full text-left px-3 py-2 text-xs font-mono rounded-md ${
+              className={`block w-full text-left px-3 py-2 typo-tech-label rounded-md ${
                 activeSection === item.id ? 'bg-[#121e2d] text-cyan-300 font-bold border border-[#1d2e45]' : 'text-slate-300 hover:bg-[#121e2d]'
               }`}
             >

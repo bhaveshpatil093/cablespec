@@ -28,24 +28,23 @@ export default function ProcessPipeline() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#121e2d] border border-[#1d2e45] text-cyan-400 font-mono text-xs uppercase tracking-wider mb-4">
+        <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#121e2d] border border-[#1d2e45] text-cyan-400 typo-tech-label">
             <Activity className="w-3.5 h-3.5 text-cyan-400" />
             <span>Process History & Automation Timeline</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight font-display">
+          <h2 className="typo-section-title">
             9-Stage Automated Mechanical Sequence
           </h2>
-          <p className="text-sm sm:text-base text-slate-400 mt-3 font-mono">
+          <p className="typo-body text-slate-400">
             Complete Cable Input → Feed → Strip → Flatten → Inspect → Pass/Fail Gate → Punch → Ready Specimen → Digital Passport
           </p>
         </div>
 
-        {/* Pipeline Horizontal Flow Selector Bar */}
+        {/* Pipeline Horizontal Selector */}
         <div className="mb-10 overflow-x-auto pb-4">
           <div className="flex items-center min-w-max space-x-2 px-2">
             {stages.map((stage, idx) => {
-              const IconComp = STAGE_ICONS[stage.icon] || Cable;
               const isSelected = stage.id === selectedStageId;
               
               return (
@@ -64,7 +63,7 @@ export default function ProcessPipeline() {
                       {stage.id}
                     </div>
                     
-                    <span className="text-[10px] font-mono text-slate-500 uppercase font-bold">
+                    <span className="typo-tech-label text-[10px] text-slate-500">
                       STAGE 0{stage.id}
                     </span>
                     <span className="text-xs font-semibold font-mono text-center truncate max-w-[110px] mt-0.5">
@@ -81,21 +80,21 @@ export default function ProcessPipeline() {
           </div>
         </div>
 
-        {/* Process History Layout matching Phone App */}
+        {/* Process History Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
-          {/* Left: Process History Timeline Card matching Phone Screenshot */}
+          {/* Left Timeline */}
           <div className="lg:col-span-6 space-y-4">
-            <div className="rounded-2xl bg-[#121e2d] p-6 border border-[#1d2e45] space-y-4">
+            <div className="dashboard-panel p-6 space-y-4">
               
               <div className="flex items-center justify-between border-b border-[#1d2e45] pb-3">
                 <div className="flex items-center space-x-2">
                   <span className="w-2 h-2 rounded-full bg-cyan-400"></span>
-                  <h3 className="font-mono text-sm font-bold text-white uppercase tracking-wider">
+                  <h3 className="typo-tech-label text-white text-xs">
                     PROCESS HISTORY
                   </h3>
                 </div>
-                <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest">
+                <span className="typo-metadata uppercase">
                   AUTOMATED SPECIMEN PREPARATION
                 </span>
               </div>
@@ -127,7 +126,7 @@ export default function ProcessPipeline() {
                         <span className="text-emerald-400 font-bold text-[11px]">
                           {st.id === 5 ? 'PASS' : 'Completed'}
                         </span>
-                        <span className="text-[10px] text-slate-400 hidden sm:inline">
+                        <span className="typo-metadata text-[10px] hidden sm:inline">
                           10 Sep 2026 09:{10 + st.id}
                         </span>
                         <div className="w-5 h-5 rounded-full border border-emerald-500/60 bg-emerald-950/40 flex items-center justify-center text-emerald-400">
@@ -142,16 +141,16 @@ export default function ProcessPipeline() {
             </div>
           </div>
 
-          {/* Right: Selected Stage Technical Specs Panel */}
+          {/* Right Selected Stage Specs */}
           <div className="lg:col-span-6 space-y-6">
-            <div className="rounded-2xl bg-[#121e2d] p-6 sm:p-8 border border-[#1d2e45] space-y-6">
+            <div className="dashboard-panel p-6 sm:p-8 space-y-6">
               
               <div className="flex items-center justify-between border-b border-[#1d2e45] pb-4">
                 <div>
-                  <span className="text-[10px] font-mono font-bold text-cyan-400 uppercase tracking-widest bg-[#0d1624] px-2.5 py-1 rounded border border-[#1d2e45]">
+                  <span className="typo-status-badge">
                     STAGE 0{currentStage.id} OF 09 • {currentStage.category}
                   </span>
-                  <h3 className="text-2xl font-bold text-white mt-2 font-display">
+                  <h3 className="typo-subsection-title mt-2">
                     {currentStage.name}
                   </h3>
                 </div>
@@ -161,14 +160,14 @@ export default function ProcessPipeline() {
                 </div>
               </div>
 
-              <p className="text-slate-300 text-sm leading-relaxed font-sans">
+              <p className="typo-body">
                 {currentStage.description}
               </p>
 
               {/* Hardware Details Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="p-4 rounded-xl bg-[#0d1624] border border-[#1d2e45]">
-                  <span className="text-[10px] font-mono text-cyan-400 uppercase font-bold block mb-1">
+                <div className="dashboard-card p-4">
+                  <span className="typo-tech-label text-cyan-400 block mb-1">
                     Primary Actuator
                   </span>
                   <p className="text-xs text-white font-mono font-semibold">
@@ -176,8 +175,8 @@ export default function ProcessPipeline() {
                   </p>
                 </div>
 
-                <div className="p-4 rounded-xl bg-[#0d1624] border border-[#1d2e45]">
-                  <span className="text-[10px] font-mono text-cyan-400 uppercase font-bold block mb-1">
+                <div className="dashboard-card p-4">
+                  <span className="typo-tech-label text-cyan-400 block mb-1">
                     Feedback Sensor
                   </span>
                   <p className="text-xs text-white font-mono font-semibold">
@@ -186,15 +185,15 @@ export default function ProcessPipeline() {
                 </div>
               </div>
 
-              {/* Parameters */}
+              {/* Operational Specs */}
               <div className="space-y-2 font-mono text-xs">
-                <div className="p-3 rounded bg-[#0d1624] border border-[#1d2e45] flex justify-between items-center">
-                  <span className="text-slate-400">PARAMETERS:</span>
+                <div className="dashboard-card p-3 flex justify-between items-center">
+                  <span className="typo-metadata uppercase">OPERATIONAL PARAMETERS:</span>
                   <span className="text-amber-400 font-bold">{currentStage.details.parameters}</span>
                 </div>
 
                 <div className="p-3 rounded bg-emerald-950/20 border border-emerald-800/40 flex justify-between items-center">
-                  <span className="text-emerald-400 font-bold">COMPLIANCE SPEC:</span>
+                  <span className="text-emerald-400 font-bold text-xs">COMPLIANCE SPEC:</span>
                   <span className="text-white font-medium">{currentStage.details.keySpec}</span>
                 </div>
               </div>
