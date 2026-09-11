@@ -1,13 +1,44 @@
 import React from 'react';
-import { Cpu, Cog, ArrowRight } from 'lucide-react';
+import { Cpu, Cog, ArrowRight, ShieldCheck, Camera, RefreshCw, QrCode } from 'lucide-react';
 import PhysicalMachineRender from './PhysicalMachineRender';
-import { Button, MetricCard, PanelCard } from './ui';
+import { Button, MetricCard, DashboardCard } from './ui';
 
 export default function Hero({ onExplorePipeline }) {
   const handleViewPrototype = () => {
     const el = document.getElementById('architecture');
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
+
+  const techIndicators = [
+    {
+      code: "SYS-LAB-01",
+      label: "ADAPTIVE",
+      desc: "Multi-gauge preparation concept",
+      icon: Cog,
+      color: "text-cyan-400"
+    },
+    {
+      code: "SYS-LAB-02",
+      label: "VISION-GUIDED",
+      desc: "Camera-assisted verification",
+      icon: Camera,
+      color: "text-emerald-400"
+    },
+    {
+      code: "SYS-LAB-03",
+      label: "CLOSED-LOOP",
+      desc: "Verify before irreversible punching",
+      icon: RefreshCw,
+      color: "text-amber-400"
+    },
+    {
+      code: "SYS-LAB-04",
+      label: "TRACEABLE",
+      desc: "Digital specimen passport",
+      icon: QrCode,
+      color: "text-purple-400"
+    }
+  ];
 
   return (
     <section id="hero" className="relative pt-24 pb-20 overflow-hidden bg-[#080d16] bg-grid-blueprint">
@@ -73,6 +104,36 @@ export default function Hero({ onExplorePipeline }) {
           <MetricCard label="Specimen Cycle Time" value="35s" subtext="vs 8 minutes manual prep" color="white" />
           <MetricCard label="Vision Tolerancing" value="±0.015mm" subtext="Telecentric sub-pixel inspection" color="cyan" />
           <MetricCard label="Digital Traceability" value="100%" subtext="QR passport & LIMS JSON sync" color="emerald" />
+        </div>
+
+        {/* TECHNICAL SYSTEM INDICATORS (ENGINEERING LABELS UNDER HERO) */}
+        <div className="pt-6 border-t border-[#1d2e45]">
+          <span className="typo-tech-label text-slate-400 block mb-3">
+            TECHNICAL ARCHITECTURE INDICATORS
+          </span>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {techIndicators.map((ind, idx) => {
+              const IconComp = ind.icon;
+              return (
+                <DashboardCard key={idx} className="p-4 space-y-2 relative border-l-2 border-l-cyan-400">
+                  <div className="flex items-center justify-between">
+                    <span className="typo-metadata text-[9px]">{ind.code}</span>
+                    <IconComp className={`w-4 h-4 ${ind.color}`} />
+                  </div>
+
+                  <div>
+                    <h4 className={`font-mono font-extrabold text-xs tracking-wider uppercase ${ind.color}`}>
+                      {ind.label}
+                    </h4>
+                    <p className="typo-body text-xs text-slate-300 mt-0.5">
+                      {ind.desc}
+                    </p>
+                  </div>
+                </DashboardCard>
+              );
+            })}
+          </div>
         </div>
 
       </div>
