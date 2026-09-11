@@ -1,147 +1,220 @@
 import React, { useState } from 'react';
 import { 
   Cog, Cpu, Sliders, Camera, Smartphone, Wrench, CheckCircle, 
-  ShieldAlert, Binary
+  ShieldAlert, Binary, Layers, Eye, ShieldCheck, BoxSelect, CheckCircle2, QrCode, Cable, Scissors, GitFork
 } from 'lucide-react';
-import { CABLESPEC_PROJECT } from '../data/cablespecData';
+import InteractiveMachineDiagram from './InteractiveMachineDiagram';
+import { PanelCard, DashboardCard, StatusBadge } from './ui';
 
 export default function MachineArchitecture() {
-  const [activeTab, setActiveTab] = useState('mechanical');
+  const [selectedModuleId, setSelectedModuleId] = useState(1);
 
-  const subsystems = CABLESPEC_PROJECT.subsystems;
-
-  const tabs = [
-    { id: 'mechanical', name: 'Mechanical System', icon: Cog, data: subsystems.mechanical },
-    { id: 'electronics', name: 'Electronics & Hardware', icon: Cpu, data: subsystems.electronics },
-    { id: 'control', name: 'Control Logic & RTOS', icon: Sliders, data: subsystems.control },
-    { id: 'vision', name: 'Optical Vision System', icon: Camera, data: subsystems.vision },
-    { id: 'mobileApp', name: 'Smartphone Companion', icon: Smartphone, data: subsystems.mobileApp },
-    { id: 'adaptiveTooling', name: 'Adaptive Tooling Head', icon: Wrench, data: subsystems.adaptiveTooling },
+  const machineModulesData = [
+    {
+      id: 1,
+      name: "Cable Input & Tension Control",
+      category: "Mechanical Feed",
+      icon: Cable,
+      headline: "Raw Cable Spool Feed & Dynamic Tension Adjustment",
+      description: "Accommodates multi-core and single-core power and telecom cables ranging from 4.0 mm to 28.0 mm outer diameter. Features an optical diameter transducer and spool drag brake.",
+      actuator: "Motorized Drag Brake & Tension Balance Arm",
+      sensor: "Ultrasonic Outer Diameter Transducer (±0.02 mm)",
+      params: "Max Cable OD: 28.0 mm | Spool Tension: 15–40 N",
+      spec: "Corrects ovality prior to motorized feeding."
+    },
+    {
+      id: 2,
+      name: "Feed & Straightening Mechanism",
+      icon: Cog,
+      category: "Motorized Kinematics",
+      headline: "5-Roller Curvature Correction Array & NEMA 34 Drive",
+      description: "Motorized rubberized dual-groove drive rollers pull cable off the input spool, while an orthogonal 5-roller straightening assembly removes residual axial curvature.",
+      actuator: "NEMA 34 Stepper Motor (4.5 Nm) + TMC5160 Driver",
+      sensor: "1000 PPR Incremental Rotary Encoder",
+      params: "Feed Rate: 5–30 mm/s | Curvature Displacement: < 0.5 mm / 300 mm",
+      spec: "Eliminates helical coil bias before sheath slitting."
+    },
+    {
+      id: 3,
+      name: "Adaptive Sheath Cutting Ring",
+      icon: Scissors,
+      category: "Adaptive Tooling",
+      headline: "Motorized Concentric 3-Jaw Rotary Slitting Head",
+      description: "Concentric self-centering iris chuck automatically clamps around outer cable sheath. A depth-calibrated rotary cutter performs circumferential and axial slits.",
+      actuator: "Dual NEMA 23 Stepper Motors + Rotary Bearings",
+      sensor: "Capacitive Core Proximity & Depth Transducer",
+      params: "Cutting Depth Precision: ±0.02 mm | Blade Hardness: TiN D2 Tool Steel",
+      spec: "Slits outer sheath without contacting inner phase insulation."
+    },
+    {
+      id: 4,
+      name: "Pneumatic Sheath Removal Head",
+      icon: GitFork,
+      category: "Pneumatics",
+      headline: "High-Force Axial Sheath Stripper & Separation Fingers",
+      description: "Pneumatic gripper jaws clamp slit sheath jacket and pull it axially off the inner conductor core bundle, ejecting stripped sheath waste into scrap bin.",
+      actuator: "SMC Compact Pneumatic Cylinder Array (0.6 MPa)",
+      sensor: "Breakaway Limit Switch & Waste Eject Confirmation",
+      params: "Stripping Force: 120 N max | Cycle Time: < 2.2 seconds",
+      spec: "Clean axial separation leaving pristine core bundle."
+    },
+    {
+      id: 5,
+      name: "Thermal Insulation Flattening Roller Press",
+      icon: Layers,
+      category: "Thermal Mechanics",
+      headline: "PTC Heated Stainless Rollers with Micrometer Gap Control",
+      description: "Curved tubular insulation sheath is passed between dual heated stainless-steel rollers to eliminate elastic memory and flatten curved wall profiles.",
+      actuator: "PID Controlled PTC Cartridge Heater + Precision Ball Screw",
+      sensor: "K-Type Thermocouple & Dual LVDT Contact Gauges",
+      params: "Temp Range: 40°C – 80°C (Material Dependent) | Parallelism: ±0.01 mm",
+      spec: "Eliminates wall curvature prior to dumbbell die punching."
+    },
+    {
+      id: 6,
+      name: "Longitudinal Slitting Assembly",
+      icon: Sliders,
+      category: "Precision Slitting",
+      headline: "Linear Guide Micro-Adjustable Longitudinal Cutter",
+      description: "Precision linear guide blade slits flattened tubular insulation into a uniform flat strip, preparing a smooth parallel surface for dumbbell die stamping.",
+      actuator: "Linear Ball Screw Drive + Hardened Carbide Blade",
+      sensor: "Laser Edge Alignment Sensor",
+      params: "Slitting Width: 10–40 mm | Edge Roughness Rz < 1.6 µm",
+      spec: "Smooth burr-free edge finish avoiding stress notches."
+    },
+    {
+      id: 7,
+      name: "Optical Vision Verification Stage",
+      icon: Eye,
+      category: "Machine Vision",
+      headline: "12MP Telecentric Camera & Overhead Gantry Mount",
+      description: "12 MegaPixel global shutter industrial camera mounted overhead inspects flattened insulation strip against diffuse LED backlight table for sub-pixel dimensional check.",
+      actuator: "Motorized LED Diffuse Backlight & XY Calibration Stage",
+      sensor: "Sony IMX253 12MP Global Shutter Sensor + Telecentric Lens",
+      params: "Resolution: 8 µm/pixel | Inspection Time: 120 ms | Accuracy: ±0.015 mm",
+      spec: "Detects air bubbles, surface scratches, burrs, and thickness uniformity."
+    },
+    {
+      id: 8,
+      name: "Precision Dumbbell Die Stamping Press",
+      icon: BoxSelect,
+      category: "Hydraulic Stamping",
+      headline: "20 kN Servo-Hydraulic Ram & SKD11 Tool Steel Dies",
+      description: "High-tonnage die press stamps standard IEC 60811 Type 1, Type 2, or ASTM D638 dumbbell specimens from verified flat insulation strip with pristine edges.",
+      actuator: "20 kN Servo-Hydraulic Ram / Pneumatic Intensifier",
+      sensor: "25 kN Load Cell Force Transducer + Optical Die Alignment",
+      params: "Punching Force: 15–20 kN | Die Hardness: SKD11 Tool Steel (HRC 60-62)",
+      spec: "Quick-change die carousel supporting Type 1, 1A, 2, and 3 dies."
+    },
+    {
+      id: 9,
+      name: "Specimen Collection & Digital Passport Tagging",
+      icon: QrCode,
+      category: "Output & LIMS",
+      headline: "Vacuum Pick-and-Place Gripper & Direct QR Laser Marking",
+      description: "Finished dumbbell test specimen is ejected into clean protective tray. Direct thermal or laser printer marks 2D QR Specimen Passport tag on sample tab.",
+      actuator: "Linear Vacuum Gripper + Direct Thermal Printer",
+      sensor: "2D Barcode Reader Verification Sensor",
+      params: "Data Payload: Batch ID, Prep Date, Dimensions (b, d), Area (A), Hash",
+      spec: "Creates instant LIMS JSON payload and Bluetooth UTM sync."
+    }
   ];
 
-  const currentTab = tabs.find(t => t.id === activeTab) || tabs[0];
-  const IconComp = currentTab.icon;
+  const currentMod = machineModulesData.find(m => m.id === selectedModuleId) || machineModulesData[0];
+  const IconComp = currentMod.icon;
 
   return (
     <section id="architecture" className="py-20 bg-[#080d16] border-t border-[#1d2e45] relative bg-grid-blueprint">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#121e2d] border border-[#1d2e45] text-cyan-400 font-mono text-xs uppercase tracking-wider mb-4">
-            <Cpu className="w-3.5 h-3.5" />
+        <div className="text-center max-w-3xl mx-auto space-y-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#121e2d] border border-[#1d2e45] text-cyan-400 typo-tech-label">
+            <Cpu className="w-3.5 h-3.5 text-cyan-400" />
             <span>Deep Engineering Specifications</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight font-display">
-            Machine System Architecture
+          <h2 className="typo-section-title">
+            Machine System Architecture & 9 Physical Modules
           </h2>
-          <p className="text-sm sm:text-base text-slate-400 mt-3 font-mono">
-            Modular engineering break-down across mechanical actuators, electronics, control algorithms, machine vision, and digital passport connectivity.
+          <p className="typo-body text-slate-400">
+            Interactive CAD schematic of CableSpec mechatronic modules. Click any module on the machine diagram to inspect its actuators, sensors, and parameters.
           </p>
         </div>
 
-        {/* Tab Selector */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-10 font-mono text-xs">
-          {tabs.map((t) => {
-            const TIcon = t.icon;
-            const isActive = t.id === activeTab;
-            return (
-              <button
-                key={t.id}
-                onClick={() => setActiveTab(t.id)}
-                className={`flex items-center gap-2 px-4 py-2.5 rounded font-bold transition-all border ${
-                  isActive
-                    ? 'bg-cyan-500 text-slate-950 border-cyan-400 shadow-md'
-                    : 'bg-[#121e2d] text-slate-300 border-[#1d2e45] hover:bg-[#162436] hover:text-white'
-                }`}
-              >
-                <TIcon className="w-3.5 h-3.5" />
-                <span>{t.name}</span>
-              </button>
-            );
-          })}
-        </div>
+        {/* DOMINANT VISUAL HIERARCHY: LARGE HORIZONTAL INTERACTIVE MACHINE DIAGRAM */}
+        <InteractiveMachineDiagram 
+          selectedModuleId={selectedModuleId}
+          onSelectModule={(id) => setSelectedModuleId(id)}
+        />
 
-        {/* Details Card */}
-        <div className="rounded-2xl bg-[#121e2d] p-6 sm:p-10 border border-[#1d2e45] shadow-2xl">
+        {/* DETAILED TECHNICAL INSPECTOR FOR SELECTED MODULE */}
+        <PanelCard className="p-6 sm:p-8 space-y-6">
           
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          <div className="flex flex-wrap items-center justify-between border-b border-[#1d2e45] pb-4 gap-4">
+            <div className="flex items-center space-x-3">
+              <div className="w-12 h-12 rounded-xl bg-[#0d1624] border border-[#1d2e45] flex items-center justify-center text-cyan-400">
+                <IconComp className="w-6 h-6" />
+              </div>
+              <div>
+                <StatusBadge variant="pass">
+                  PHYSICAL MODULE 0{currentMod.id} OF 09 • {currentMod.category}
+                </StatusBadge>
+                <h3 className="typo-subsection-title text-2xl text-white mt-1">
+                  {currentMod.name}
+                </h3>
+              </div>
+            </div>
+
+            <div className="flex items-center space-x-2 font-mono text-xs">
+              <button
+                onClick={() => setSelectedModuleId(selectedModuleId > 1 ? selectedModuleId - 1 : 9)}
+                className="px-3 py-1.5 rounded bg-[#0d1624] border border-[#1d2e45] text-slate-300 hover:text-white"
+              >
+                ← PREV MODULE
+              </button>
+              <button
+                onClick={() => setSelectedModuleId(selectedModuleId < 9 ? selectedModuleId + 1 : 1)}
+                className="px-3 py-1.5 rounded bg-[#0d1624] border border-[#1d2e45] text-slate-300 hover:text-white"
+              >
+                NEXT MODULE →
+              </button>
+            </div>
+          </div>
+
+          <p className="typo-body text-base text-cyan-200 border-l-2 border-cyan-400 pl-3 py-0.5 font-mono">
+            {currentMod.headline}
+          </p>
+
+          <p className="typo-body text-slate-300">
+            {currentMod.description}
+          </p>
+
+          {/* Actuator, Sensor & Operational Parameters Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 font-mono text-xs">
             
-            {/* Left Content */}
-            <div className="lg:col-span-7 space-y-6">
-              
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-[#0d1624] border border-[#1d2e45] flex items-center justify-center text-cyan-400">
-                  <IconComp className="w-5 h-5" />
-                </div>
-                <div>
-                  <span className="text-[10px] font-mono text-cyan-400 font-bold uppercase tracking-widest block">
-                    SUBSYSTEM MODULE
-                  </span>
-                  <h3 className="text-xl font-bold text-white font-display">
-                    {currentTab.data.name}
-                  </h3>
-                </div>
-              </div>
+            <DashboardCard className="p-4 space-y-1">
+              <span className="typo-tech-label text-cyan-400 block">PRIMARY ACTUATOR</span>
+              <span className="font-bold text-white block">{currentMod.actuator}</span>
+            </DashboardCard>
 
-              <p className="text-sm font-mono text-cyan-200 border-l-2 border-cyan-400 pl-3 py-0.5">
-                {currentTab.data.headline}
-              </p>
+            <DashboardCard className="p-4 space-y-1">
+              <span className="typo-tech-label text-cyan-400 block">FEEDBACK SENSOR</span>
+              <span className="font-bold text-white block">{currentMod.sensor}</span>
+            </DashboardCard>
 
-              {activeTab === 'mobileApp' && (
-                <div className="p-3.5 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-mono space-y-1">
-                  <span className="font-bold flex items-center gap-2">
-                    <ShieldAlert className="w-4 h-4 text-amber-400" />
-                    CLARIFICATION FOR TECHNICAL REVIEWERS & JUDGES:
-                  </span>
-                  <p className="text-slate-300 font-sans">
-                    The smartphone application is an auxiliary support layer for QR specimen passport generation, operator ID logging, and wireless sync to Universal Testing Machine (UTM) laboratory software.
-                  </p>
-                </div>
-              )}
+            <DashboardCard className="p-4 space-y-1">
+              <span className="typo-tech-label text-amber-400 block">OPERATIONAL PARAMS</span>
+              <span className="font-bold text-amber-300 block">{currentMod.params}</span>
+            </DashboardCard>
 
-              {/* Engineering Highlights */}
-              <div className="space-y-2.5 pt-2">
-                <h4 className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wider">
-                  Key Technical Innovations & Implementations
-                </h4>
-                {currentTab.data.highlights.map((h, i) => (
-                  <div key={i} className="flex items-start gap-2.5 p-3 rounded bg-[#0d1624] border border-[#1d2e45]">
-                    <CheckCircle className="w-4 h-4 text-cyan-400 mt-0.5 flex-shrink-0" />
-                    <span className="text-xs text-slate-300 leading-relaxed font-sans">
-                      {h}
-                    </span>
-                  </div>
-                ))}
-              </div>
-
-            </div>
-
-            {/* Right Specs Table */}
-            <div className="lg:col-span-5 space-y-4 font-mono">
-              <div className="p-5 rounded-xl bg-[#0d1624] border border-[#1d2e45] space-y-3">
-                <h4 className="text-xs font-bold text-cyan-400 uppercase tracking-widest border-b border-[#1d2e45] pb-2 flex items-center justify-between">
-                  <span>HARDWARE SPEC SHEET</span>
-                  <Binary className="w-4 h-4 text-slate-500" />
-                </h4>
-
-                <div className="space-y-2">
-                  {currentTab.data.specs.map((spec, i) => (
-                    <div key={i} className="flex items-center justify-between text-xs py-1 border-b border-[#1d2e45]/50 last:border-0">
-                      <span className="text-slate-400">{spec.label}</span>
-                      <span className="text-white font-bold bg-[#121e2d] px-2 py-0.5 rounded border border-[#1d2e45] text-right">
-                        {spec.value}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-            </div>
+            <DashboardCard className="p-4 space-y-1">
+              <span className="typo-tech-label text-emerald-400 block">CRITICAL TOLERANCE</span>
+              <span className="font-bold text-emerald-300 block">{currentMod.spec}</span>
+            </DashboardCard>
 
           </div>
 
-        </div>
+        </PanelCard>
 
       </div>
     </section>
