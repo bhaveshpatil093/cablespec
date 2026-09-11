@@ -1,19 +1,24 @@
 import React from 'react';
-import { Cpu, Cog, Smartphone, ArrowRight, CheckCircle2 } from 'lucide-react';
-import { CableCrossSection } from './CableGraphics';
-import { Button, MetricCard, StatusBadge, PanelCard, DashboardCard } from './ui';
+import { Cpu, Cog, ArrowRight } from 'lucide-react';
+import PhysicalMachineRender from './PhysicalMachineRender';
+import { Button, MetricCard, PanelCard } from './ui';
 
 export default function Hero({ onExplorePipeline }) {
+  const handleViewPrototype = () => {
+    const el = document.getElementById('architecture');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
-    <section className="relative pt-28 pb-20 overflow-hidden bg-[#080d16] bg-grid-blueprint">
+    <section id="hero" className="relative pt-24 pb-20 overflow-hidden bg-[#080d16] bg-grid-blueprint">
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-10">
         
         {/* Top Tagline Banner */}
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded bg-[#121e2d] border border-[#1d2e45] mb-8">
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded bg-[#121e2d] border border-[#1d2e45]">
           <span className="flex h-2 w-2 rounded-full bg-emerald-400"></span>
           <span className="typo-tech-label text-cyan-300">
-            SPECIMEN PASSPORT SYSTEM • SP-2026-00127
+            SPECIMEN PASSPORT SYSTEM • HARDWARE PRIMARY
           </span>
           <span className="text-xs text-slate-600">|</span>
           <span className="typo-metadata text-slate-400">
@@ -21,128 +26,53 @@ export default function Hero({ onExplorePipeline }) {
           </span>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
-          {/* Left Hero Text */}
-          <div className="lg:col-span-7 space-y-6">
-            <div className="space-y-2">
-              <span className="typo-tech-label text-cyan-400 block">
-                AUTOMATED CABLE SPECIMEN PREPARATION SYSTEM
-              </span>
-              <h1 className="typo-page-title">
-                CABLE<span className="text-cyan-400">SPEC</span>
-              </h1>
-            </div>
-            
-            <p className="text-lg font-mono text-slate-300 font-medium leading-snug">
-              Precision mechanical hardware automation for cable compliance testing (IEC 60811 / IS 10810 / ASTM).
-            </p>
+        {/* Hero Title & Main Statement */}
+        <div className="max-w-4xl space-y-4">
+          <h1 className="typo-page-title">
+            CABLE<span className="text-cyan-400">SPEC</span>
+          </h1>
 
-            <p className="typo-body">
-              Replaces manual razor cutting with an end-to-end physical mechatronic machine. Automatically feeds raw cable, strips outer sheath, flattens insulation, inspects sub-pixel optical quality, and punches standard dumbbell test specimens.
-            </p>
+          <h2 className="text-xl sm:text-2xl font-mono text-cyan-300 font-extrabold tracking-wide">
+            Adaptive Automated Cable Specimen Preparation System
+          </h2>
 
-            {/* Core Innovation Hardware Callout Card */}
-            <PanelCard className="p-4 space-y-2">
-              <div className="flex items-center gap-2 typo-tech-label text-amber-400">
-                <Cog className="w-4 h-4 text-amber-400 animate-spin" style={{ animationDuration: '10s' }} />
-                <span>HARDWARE MACHINE PRIMARY INNOVATION</span>
-              </div>
-              <p className="typo-body text-xs text-slate-300">
-                The core physical machine performs multi-axis mechanical feeding, thermal flattening, and 20 kN die punching. The smartphone application serves as the supporting <strong className="text-cyan-400">Digital Specimen Passport</strong> & LIMS traceability layer.
-              </p>
-            </PanelCard>
+          <p className="typo-body text-base text-slate-300 leading-relaxed max-w-3xl">
+            CableSpec automates cable specimen preparation, verifies the specimen using vision, and creates a traceable digital specimen record for compliance laboratories adhering to IEC 60811, IS 10810, and ASTM standards.
+          </p>
 
-            {/* Action buttons */}
-            <div className="flex flex-wrap items-center gap-4 pt-2">
-              <Button onClick={onExplorePipeline} variant="primary" size="md" icon={ArrowRight}>
-                EXPLORE MACHINE PIPELINE
-              </Button>
+          {/* Primary Action Buttons */}
+          <div className="flex flex-wrap items-center gap-4 pt-2">
+            <Button onClick={onExplorePipeline} variant="primary" size="lg" icon={ArrowRight}>
+              EXPLORE THE SYSTEM
+            </Button>
 
-              <a href="#architecture">
-                <Button variant="secondary" size="md" icon={Cpu}>
-                  TECHNICAL DOSSIER
-                </Button>
-              </a>
-            </div>
+            <Button onClick={handleViewPrototype} variant="secondary" size="lg" icon={Cpu}>
+              VIEW PROTOTYPE
+            </Button>
+          </div>
+        </div>
 
-            {/* Metrics Ribbon */}
-            <div className="grid grid-cols-3 gap-4 pt-4 border-t border-[#1d2e45]">
-              <MetricCard label="Cycle Time" value="35s" subtext="vs 8m manual prep" color="white" />
-              <MetricCard label="Vision Tolerancing" value="±0.015mm" subtext="Sub-pixel camera" color="cyan" />
-              <MetricCard label="Digital Traceability" value="100%" subtext="QR passport tag" color="emerald" />
-            </div>
-
+        {/* DOMINANT VISUAL HIERARCHY: PHYSICAL AUTOMATED MACHINE RENDERING */}
+        <div className="space-y-4">
+          <div className="flex items-center justify-between typo-tech-label text-slate-400">
+            <span className="flex items-center gap-2">
+              <Cog className="w-4 h-4 text-cyan-400" />
+              PHYSICAL HARDWARE MACHINE SCHEMATIC
+            </span>
+            <span className="text-emerald-400 font-bold">
+              OVERHEAD VISION CAMERA MOUNTED ABOVE VERIFICATION STAGE
+            </span>
           </div>
 
-          {/* Right Visual: Cable Specimen Passport Screen Graphic matching Phone App */}
-          <div className="lg:col-span-5">
-            <PanelCard className="shadow-2xl space-y-5">
-              
-              {/* Header */}
-              <div className="flex items-center justify-between border-b border-[#1d2e45] pb-4">
-                <div>
-                  <span className="typo-tech-label text-slate-400 block">SPECIMEN PASSPORT</span>
-                  <span className="typo-subsection-title text-white">SP-2026-00127</span>
-                </div>
+          {/* Machine Rendering Visual Component */}
+          <PhysicalMachineRender />
+        </div>
 
-                <div className="text-right typo-metadata">
-                  <span className="text-slate-300 font-bold block uppercase">CABLESPEC</span>
-                  <span className="text-cyan-400 font-bold">PREPARE VERIFY TRACE TRUST</span>
-                </div>
-              </div>
-
-              {/* Cable Cross-Section SVG Graphic & Measurement Scale Ruler */}
-              <CableCrossSection cableLabel="4-CORE ALUMINIUM CABLE (16 mm²)" />
-
-              {/* Status & Vision Verification Gauge Block matching Phone App */}
-              <div className="grid grid-cols-2 gap-4 pt-2">
-                
-                {/* Left Specs */}
-                <div className="space-y-3 font-mono text-xs">
-                  <div>
-                    <span className="typo-tech-label text-slate-400 block">CABLE TYPE</span>
-                    <span className="font-bold text-white">4-Core Aluminium Cable</span>
-                  </div>
-
-                  <div>
-                    <span className="typo-tech-label text-slate-400 block">SIZE / BATCH</span>
-                    <span className="font-bold text-white">16 mm² • B-0426</span>
-                  </div>
-
-                  <div>
-                    <span className="typo-tech-label text-slate-400 block">PREPARATION STATUS</span>
-                    <StatusBadge variant="pass" className="inline-block mt-1">
-                      STANDARD-READY
-                    </StatusBadge>
-                  </div>
-                </div>
-
-                {/* Right PASS Badge Gauge */}
-                <DashboardCard className="flex flex-col items-center justify-center text-center">
-                  <div className="w-12 h-12 rounded-full border-2 border-emerald-500 bg-emerald-950/40 flex items-center justify-center mb-1 text-emerald-400">
-                    <CheckCircle2 className="w-7 h-7 text-emerald-400" />
-                  </div>
-                  <span className="typo-status-badge border-0 bg-transparent text-emerald-400 px-0">PASS VERIFIED</span>
-                  <span className="typo-metadata text-[9px] mt-0.5">Alignment • Geometry • Surface</span>
-                </DashboardCard>
-
-              </div>
-
-              {/* Supporting Companion Layer Badge */}
-              <div className="pt-3 border-t border-[#1d2e45] flex items-center justify-between typo-metadata">
-                <span className="flex items-center gap-1.5">
-                  <Smartphone className="w-3.5 h-3.5 text-cyan-400" />
-                  <span>Companion Layer:</span>
-                </span>
-                <span className="text-cyan-300 font-semibold bg-[#0d1624] px-2 py-0.5 rounded border border-[#1d2e45]">
-                  Digital Passport Reader Active
-                </span>
-              </div>
-
-            </PanelCard>
-          </div>
-
+        {/* Core Metrics Ribbon */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+          <MetricCard label="Specimen Cycle Time" value="35s" subtext="vs 8 minutes manual prep" color="white" />
+          <MetricCard label="Vision Tolerancing" value="±0.015mm" subtext="Telecentric sub-pixel inspection" color="cyan" />
+          <MetricCard label="Digital Traceability" value="100%" subtext="QR passport & LIMS JSON sync" color="emerald" />
         </div>
 
       </div>
