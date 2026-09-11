@@ -4,6 +4,7 @@ import Hero from './components/Hero';
 import ProjectOverview from './components/ProjectOverview';
 import ProblemStatement from './components/ProblemStatement';
 import WorkflowComparison from './components/WorkflowComparison';
+import SolutionPillars from './components/SolutionPillars';
 import ProcessPipeline from './components/ProcessPipeline';
 import MachineArchitecture from './components/MachineArchitecture';
 import VisionSimulator from './components/VisionSimulator';
@@ -38,6 +39,7 @@ export default function App() {
           <ProjectOverview />
           <ProblemStatement />
           <WorkflowComparison />
+          <SolutionPillars />
           <ProcessPipeline />
           <MachineArchitecture />
           <VisionSimulator />
