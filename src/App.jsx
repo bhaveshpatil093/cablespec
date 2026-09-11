@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import ProjectOverview from './components/ProjectOverview';
 import ProcessPipeline from './components/ProcessPipeline';
 import MachineArchitecture from './components/MachineArchitecture';
 import VisionSimulator from './components/VisionSimulator';
@@ -32,6 +33,7 @@ export default function App() {
         
         <main>
           <Hero onExplorePipeline={scrollToPipeline} />
+          <ProjectOverview />
           <ProcessPipeline />
           <MachineArchitecture />
           <VisionSimulator />
