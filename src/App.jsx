@@ -10,6 +10,7 @@ import ResearchMarketFeasibility from './components/ResearchMarketFeasibility';
 import TeamSih from './components/TeamSih';
 import Footer from './components/Footer';
 import TechnicalBackground from './components/TechnicalBackground';
+import MobileBottomNav from './components/MobileBottomNav';
 
 export default function App() {
   const [activeSection, setActiveSection] = useState('pipeline');
@@ -21,11 +22,11 @@ export default function App() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#080d16] text-slate-100 selection:bg-cyan-500 selection:text-slate-950 font-sans overflow-x-hidden">
+    <div className="relative min-h-screen bg-[#080d16] text-slate-100 selection:bg-cyan-500 selection:text-slate-950 font-sans overflow-x-hidden pb-16 md:pb-0">
       {/* Global Blueprint Technical Background */}
       <TechnicalBackground />
 
-      {/* Main Interactive Interface Layer */}
+      {/* Main Interface Layer */}
       <div className="relative z-10">
         <Navbar activeSection={activeSection} setActiveSection={setActiveSection} />
         
@@ -41,6 +42,9 @@ export default function App() {
         </main>
 
         <Footer />
+
+        {/* Smartphone Quick Bottom Navigation Bar */}
+        <MobileBottomNav activeSection={activeSection} setActiveSection={setActiveSection} />
       </div>
     </div>
   );
